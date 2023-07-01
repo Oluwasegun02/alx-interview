@@ -4,9 +4,7 @@
 """
 
 def pascal_triangle(n):
-    """ 
-    Create a function def pascal_triangle(n) that Return an empty list for n <= 0 if n is positive integer returns a list of lists where each inner list is a row of the Pascal's triangle, starting from the top row.First element of each row is always 1
-    Last element of each row is always 1
+    """ Create a function def pascal_triangle(n): that returns a list of lists of integers representing the Pascal’s triangle of n
     """
     if n <= 0:
         return [] 
