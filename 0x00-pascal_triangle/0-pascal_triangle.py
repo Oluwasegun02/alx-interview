@@ -1,6 +1,10 @@
 #!/usr/bin/python3
+"""
+0. Pascal's Triangle
+"""
 def pascal_triangle(n):
-    """ Create a function def pascal_triangle(n) that 
+    """ 
+    Create a function def pascal_triangle(n) that 
         Return an empty list for n <= 0
         if n is positive integer returns a list of lists
         where each inner list is a row of the Pascal's triangle
