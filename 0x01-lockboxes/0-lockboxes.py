@@ -8,9 +8,9 @@ def canUnlockAll(boxes):
     And returns True or False
     '''
     num_boxes = len(boxes)
-    visited = [False] * num_boxes  # Keep track of visited boxes
-    visited[0] = True  # Mark the first box as visited
-    stack = [0]  # Use a stack to perform DFS
+    visited = [False] * num_boxes
+    visited[0] = True 
+    stack = [0]  
 
     while stack:
         box = stack.pop()
@@ -21,10 +21,3 @@ def canUnlockAll(boxes):
                 stack.append(key)
 
     return all(visited)
-
-# Example usage
-# boxes = [[1], [2], [3], []]
-# print(canUnlockAll(boxes))  # Output: True
-
-# boxes = [[1, 2], [3], [4], []]
-# print(canUnlockAll(boxes))  # Output: False
