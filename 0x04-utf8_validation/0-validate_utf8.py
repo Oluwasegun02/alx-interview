@@ -1,32 +1,44 @@
 #!/urs/bin/python3
+"""Module for validUtf8 method"""
+
 
 def validUTF8(data):
-    num_bytes_to_check = 0
+    """Determines if given data represents valid UTF-8 encoding
+    Args:
+        data: list of integers
+    Returns:
+        True if valid UTF-8 encoding, otherwise False
+    """
+    # Number of bytes in the current UTF-8 character
+    n_bytes = 0
 
-    for byte in data:
-        # Get the 8 least significant bits of the byte
-        byte_value = byte & 0xFF
+    # Mask to check if the most significant bit is set or not
+    mask1 = 1 << 7
 
-        if num_bytes_to_check == 0:
-            # Check how many bytes this character should have
-            if byte_value >> 7 == 0:
-                num_bytes_to_check = 1
-            elif byte_value >> 5 == 0b110:
-                num_bytes_to_check = 2
-            elif byte_value >> 4 == 0b1110:
-                num_bytes_to_check = 3
-            elif byte_value >> 3 == 0b11110:
-                num_bytes_to_check = 4
-            else:
-                # Invalid format for the first byte of a character
+    # Mask to check if the second most significant bit is set or not
+    mask2 = 1 << 6
+    for num in data:
+
+        # Get the number of set most significant bits in the byte if
+        # this is the starting byte of an UTF-8 character.
+        mask = 1 << 7
+        if n_bytes == 0:
+            while mask & num:
+                n_bytes += 1
+                mask = mask >> 1
+
+            # 1 byte characters
+            if n_bytes == 0:
+                continue
+
+            # Invalid scenarios according to the rules of the problem.
+            if n_bytes == 1 or n_bytes > 4:
                 return False
         else:
-            # Check if the byte starts with the correct continuation bits "10"
-            if byte_value >> 6 != 0b10:
+            # If this byte is a part of an existing UTF-8 character, then we
+            # simply have to look at the two most significant bits and we make
+            # use of the masks we defined before.
+            if not (num & mask1 and not (num & mask2)):
                 return False
-
-        num_bytes_to_check -= 1
-
-    # If num_bytes_to_check is still positive, it means we are missing some continuation bytes
-    return num_bytes_to_check == 0
-
+        n_bytes -= 1
+    return n_bytes == 0
