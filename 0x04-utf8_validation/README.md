@@ -1,24 +1,34 @@
-validUTF8 Function
+# 0x04 UTF-8 Validation
 
-The `validUTF8` function is a Python method that determines if a given data set represents a valid UTF-8 encoding.
+1[](https://realpython.com/cdn-cgi/image/width=960,format=auto/https://files.realpython.com/media/Encodings--Number-Systems_Watermarked.906d62e907dc.jpg)
 
-Function Signature
-def validUTF8(data: List[int]) -> bool:
-    ...
-Parameters
-`data` (List[int]): A list of integers representing bytes in the data set. Each integer represents 1 byte of data, containing 8 least significant bits of the byte.
-Return Value
-`bool`: Returns `True` if the `data` set is a valid UTF-8 encoding, otherwise returns `False`.
-Function Description
+## Resources
 
-A character in UTF-8 can be 1 to 4 bytes long. The function `validUTF8` checks if the `data` set follows the rules of UTF-8 encoding.
+- [UTF-8](https://en.wikipedia.org/wiki/UTF-8)
+- [Characters, Symbols, and the Unicode Miracle](youtube.com/watch?v=MijmeoH9LT4)
 
-The function iterates through each byte in the `data` set and verifies if the bytes correspond to the correct number of bytes for a character and if they follow the UTF-8 format. Specifically, it checks the following:
+## Requirements
 
-If the first byte of a character starts with the correct number of leading 1s corresponding to the total number of bytes in the character.
-If continuation bytes start with "10".
-If the `data` set follows the UTF-8 format correctly, the function returns `True`. If any of the bytes do not adhere to the UTF-8 format, the function returns `False`.
+- Allowed editors: `vi`, `vim`, `emacs`
+- All your files will be interpreted/compiled on `Ubuntu 14.04 LTS` using `python3 (version 3.4.3)`
+- All your files should end with a new line
+- The first line of all your files should be exactly `#!/usr/bin/python3`
+- A README.md file, at the root of the folder of the project, is mandatory
+- Your code should use the PEP 8 style (version 1.7.x)
+- All your files must be executable
 
-Example -> `main.py`
+> Write a method that determines if a given data set represents a valid UTF-8 encoding.
 
-Note: This function only checks for the validity of the UTF-8 encoding based on the given `data` set's byte representation and does not decode the characters to their actual Unicode code points.
+- Prototype: def validUTF8(data)
+- Return: True if data is a valid UTF-8 encoding, else return False
+> A character in UTF-8 can be 1 to 4 bytes long
+> The data set can contain multiple characters
+> The data will be represented by a list of integers
+> Each integer represents 1 byte of data, therefore you only need to handle the 8 least significant bits of each integer.
+
+```bash
+sammy@ubuntu-trusty-64:~$ python3 utf_test.py
+True
+True
+False
+```
